@@ -1,0 +1,184 @@
+/* =====================================================
+   SSS FASHION – EXTRA MOTION LAYER
+   (hover, floating, moving, reveal effects)
+   Uses individual transform props (translate/rotate/scale)
+   so it never fights with existing transform rules.
+===================================================== */
+
+/* ---------- shared keyframes ---------- */
+@keyframes riseIn { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: none; } }
+@keyframes revealUp { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
+@keyframes shineText { to { background-position: 200% center; } }
+@keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+@keyframes bobSm { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+@keyframes spinSlow { to { rotate: 360deg; } }
+@keyframes twinkle { 0%, 100% { scale: .7; rotate: 0deg; opacity: .55; } 50% { scale: 1.25; rotate: 90deg; opacity: 1; } }
+@keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.03; } }
+@keyframes archGlow { from { box-shadow: 0 0 10px rgba(219,167,61,.15), inset 0 0 20px rgba(230,175,73,.1); } to { box-shadow: 0 0 45px rgba(219,167,61,.5), inset 0 0 40px rgba(230,175,73,.25); } }
+@keyframes btnPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,189,98,.5); } 60% { box-shadow: 0 0 0 16px rgba(233,189,98,0); } }
+@keyframes ringPulse { 0% { scale: 1; opacity: .8; } 100% { scale: 1.18; opacity: 0; } }
+@keyframes scrollCue { 0% { scale: 1 0; opacity: 0; } 50% { scale: 1 1; opacity: 1; } 100% { scale: 1 0; opacity: 0; translate: 0 14px; } }
+@keyframes dustUp {
+  0% { transform: translate(0, 0) scale(.6); opacity: 0; }
+  15% { opacity: .9; }
+  85% { opacity: .6; }
+  100% { transform: translate(var(--drift, 0), -105vh) scale(1.2); opacity: 0; }
+}
+@keyframes sparkle {
+  from { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(var(--s, 1)); }
+  to { opacity: 0; transform: translate(var(--dx, 0), 34px) rotate(160deg) scale(0); }
+}
+@keyframes heartPop { 0% { scale: 1; } 35% { scale: 1.55; } 60% { scale: .85; } 100% { scale: 1; } }
+@keyframes countBump { 0% { scale: 1; } 40% { scale: 1.8; } 100% { scale: 1; } }
+@keyframes kenburns { from { scale: 1; } to { scale: 1.08; } }
+@keyframes lineDraw { from { scale: 0 1; } to { scale: 1 1; } }
+@keyframes softPulse { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+@keyframes sweep { to { translate: 260% 0; } }
+
+/* ---------- reveal on scroll (added by useScrollEffects) ---------- */
+.reveal { opacity: 0; }
+.reveal.in-view { opacity: 1; animation: revealUp .95s cubic-bezier(.2, .7, .2, 1) backwards; animation-delay: var(--rd, 0ms); }
+.in-view .eyebrow span, .eyebrow.in-view span { transform-origin: left; animation: lineDraw 1s .35s cubic-bezier(.2,.7,.2,1) backwards; }
+
+/* ---------- top scroll progress ---------- */
+.scroll-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 10000; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, #b58d52, #f3d28b, #b58d52); box-shadow: 0 0 10px rgba(228,201,149,.7); pointer-events: none; }
+
+/* ---------- cursor sparkle trail ---------- */
+.sparkle-trail { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
+.sparkle-trail span { position: absolute; color: #e4b85c; font-size: 14px; translate: -50% -50%; text-shadow: 0 0 8px rgba(255,214,120,.9); animation: sparkle .9s ease-out forwards; }
+
+/* ---------- announcement bar shimmer ---------- */
+.announcement { position: relative; overflow: hidden; }
+.announcement::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.22), transparent); animation: sweep 5s ease-in-out infinite; pointer-events: none; }
+.announcement > span:first-child { display: inline-block; animation: twinkle 2.4s ease-in-out infinite; }
+
+/* ---------- header ---------- */
+.brand-mark span { display: inline-block; animation: spinSlow 9s linear infinite; }
+.brand:hover .brand-mark { animation: bobSm .8s ease-in-out infinite; }
+.main-nav a { transition: color .3s, translate .3s; }
+.main-nav a:hover { translate: 0 -3px; }
+.wishlist-action i.bump { display: inline-block; animation: countBump .5s ease; }
+.wishlist-action:hover svg { animation: heartPop .7s ease; }
+
+/* ---------- HERO ---------- */
+.hero-section { --px: 0; --py: 0; }
+.hero-content > * { animation: riseIn 1s cubic-bezier(.2, .7, .2, 1) backwards; }
+.hero-content > :nth-child(1) { animation-delay: .1s; }
+.hero-content > :nth-child(2) { animation-delay: .3s; }
+.hero-content > :nth-child(3) { animation-delay: .5s; }
+.hero-content > :nth-child(4) { animation-delay: .7s; }
+.hero-content > :nth-child(5) { animation-delay: .9s; }
+.hero-content h1 span { display: inline-block; background: linear-gradient(100deg, #c98a2b 0%, #ffe6a3 25%, #c98a2b 50%, #ffe6a3 75%, #c98a2b 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shineText 4s linear infinite; }
+.location .star { display: inline-block; animation: twinkle 2.2s ease-in-out infinite; }
+
+.hero-section .primary-btn { position: relative; overflow: hidden; display: inline-block; translate: var(--tx, 0) var(--ty, 0); animation: btnPulse 2.6s ease-out infinite; transition: all .4s, translate .2s ease-out; }
+.hero-section .primary-btn::before { content: ""; position: absolute; top: 0; left: -70%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); animation: sweep 3.8s ease-in-out infinite; }
+.secondary-btn { position: relative; transition: color .3s, letter-spacing .3s; }
+.secondary-btn:hover { letter-spacing: 1px; }
+.hallmark span { transform-origin: left; animation: lineDraw 1.2s 1.2s ease backwards; }
+
+/* floating gold dust */
+.gold-dust { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.gold-dust i { position: absolute; bottom: -20px; border-radius: 50%; background: radial-gradient(circle, #fff0bd 0%, #e9bd62 55%, transparent 72%); opacity: 0; animation: dustUp linear infinite; }
+
+/* bridal visual: parallax + float */
+.bride-image { translate: calc(var(--px) * -14px) calc(var(--py) * -10px); transition: translate .5s ease-out; animation: breathe 7s ease-in-out infinite, riseIn 1.3s cubic-bezier(.2,.7,.2,1) backwards !important; }
+.golden-arch { translate: calc(var(--px) * 12px) calc(var(--py) * 8px); transition: translate .5s ease-out; animation: archGlow 4s ease-in-out infinite alternate; }
+.hero-ring { position: absolute; z-index: 4; top: 7%; left: 14%; width: 72%; aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(233,189,98,.45); pointer-events: none; animation: spinSlow 45s linear infinite; }
+.hero-star { position: absolute; z-index: 5; color: #f1c765; text-shadow: 0 0 14px rgba(255,205,100,.9); pointer-events: none; animation: twinkle 3s ease-in-out infinite; }
+.hero-star.star-one { top: 12%; right: 11%; font-size: 46px; }
+.hero-star.star-two { top: 34%; left: 9%; font-size: 26px; animation-delay: 1.2s; }
+.brand-logo { animation: bob 5s ease-in-out infinite; transition: scale .4s; }
+.brand-logo:hover { scale: 1.1; }
+.brand-logo::before { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 1px solid #dba73d; animation: ringPulse 3s ease-out infinite; pointer-events: none; }
+.brand-logo span { display: inline-block; animation: bobSm 2.5s ease-in-out infinite; }
+.temple-label { animation: softPulse 3.5s ease-in-out infinite; }
+.hero-bottom i { transform-origin: top; animation: scrollCue 2.2s ease-in-out infinite; }
+
+/* ---------- ticker ---------- */
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-track span { display: inline-block; transition: scale .3s, color .3s; }
+.ticker-track span:hover { scale: 1.5; color: #fff; }
+
+/* ---------- categories ---------- */
+.category-card { transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .25s ease-out, box-shadow .5s; will-change: transform; }
+.category-card:hover { box-shadow: 0 30px 60px rgba(60,40,15,.28); }
+.category-card img { animation: kenburns 14s ease-in-out infinite alternate; }
+.category-card::before { content: ""; position: absolute; inset: 0; z-index: 2; opacity: 0; pointer-events: none; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,236,190,.38), transparent 55%); transition: opacity .4s; }
+.category-card:hover::before { opacity: 1; }
+
+/* ---------- gallery marquee: floating images ---------- */
+.marquee-image { animation: bob 5s ease-in-out infinite; rotate: -1.5deg; transition: transform .5s, rotate .5s, box-shadow .6s; }
+.marquee-image:nth-child(even) { rotate: 1.5deg; }
+.marquee-image:hover { rotate: 0deg; animation-play-state: paused; }
+.marquee-image.mi-0 { animation-delay: 0s; } .marquee-image.mi-1 { animation-delay: -1s; } .marquee-image.mi-2 { animation-delay: -2s; }
+.marquee-image.mi-3 { animation-delay: -3s; } .marquee-image.mi-4 { animation-delay: -4s; }
+
+/* ---------- section headings: shimmering gold <em> ---------- */
+.section-heading h2 em, .gallery-heading h2 em, .benefit-intro h2 em { background: linear-gradient(100deg, #a8793a, #e6c07a, #a8793a, #e6c07a, #a8793a); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shineText 5s linear infinite; }
+.text-link span { display: inline-block; transition: translate .3s; }
+.text-link:hover span { translate: 4px -4px; }
+
+/* ---------- products ---------- */
+.product-card { transition: transform .2s ease-out, box-shadow .45s ease; will-change: transform; }
+.product-card:hover { transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-12px); box-shadow: 0 28px 55px rgba(99,72,34,.2); }
+@supports (animation-timeline: view()) {
+  /* keep hover transform working after the scroll-in animation ends */
+  .product-card { animation-fill-mode: backwards; }
+}
+.product-image { position: relative; }
+.product-image::before { content: ""; position: absolute; inset: 0; z-index: 1; opacity: 0; pointer-events: none; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,236,190,.4), transparent 55%); transition: opacity .4s; }
+.product-card:hover .product-image::before { opacity: 1; }
+.product-tag { animation: bobSm 3.5s ease-in-out infinite; }
+.heart-button.liked { animation: none; }
+.heart-button.liked svg { animation: heartPop .6s ease; color: #c0392b; }
+.heart-button:hover { scale: 1.15; }
+.filter-tabs button { transition: color .3s, translate .3s; }
+.filter-tabs button:hover { translate: 0 -3px; }
+.filter-tabs button.selected { animation: bobSm .6s ease 1; }
+.product-meta h3 { transition: color .3s, translate .3s; }
+.product-card:hover .product-meta h3 { color: #a8793a; translate: 4px 0; }
+
+/* ---------- story ---------- */
+.story-image { overflow: hidden; }
+.story-image img { scale: 1.12; translate: 0 var(--py2, 0px); transition: transform 1.3s ease, filter .8s ease, translate .3s linear; }
+.image-vertical-label { animation: softPulse 4s ease-in-out infinite; }
+.story-signature em { background: linear-gradient(100deg, #c6a46a, #fff0c4, #c6a46a, #fff0c4, #c6a46a); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shineText 4s linear infinite; }
+
+/* ---------- benefits ---------- */
+.benefit-item { transition: translate .4s, box-shadow .4s, background .4s; }
+.benefit-item:hover { translate: 0 -10px; }
+.benefit-icon { animation: bobSm 3.8s ease-in-out infinite; transition: all .35s, rotate .9s cubic-bezier(.2,.7,.2,1); }
+.benefit-item:nth-child(2) .benefit-icon { animation-delay: -.8s; }
+.benefit-item:nth-child(3) .benefit-icon { animation-delay: -1.6s; }
+.benefit-item:nth-child(4) .benefit-icon { animation-delay: -2.4s; }
+.benefit-item:hover .benefit-icon { rotate: 360deg; scale: 1.12; }
+
+/* ---------- showrooms ---------- */
+.shop-list > div { transition: translate .4s ease, border-color .4s; }
+.shop-list > div:hover { translate: 12px 0; }
+.btn-gold { translate: var(--tx, 0) var(--ty, 0); transition: all .35s, translate .2s ease-out; animation: btnPulse 3s ease-out infinite; }
+
+/* ---------- footer ---------- */
+.footer-col > a, .footer-col > span { display: block; width: fit-content; transition: color .25s, translate .3s; }
+.footer-col > a:hover { translate: 8px 0; }
+.socials a:hover { animation: bobSm .5s ease 2; }
+.footer-logo:hover .brand-mark { animation: heartPop .7s ease; }
+
+/* ---------- back to top ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .back-to-top { opacity: 0; pointer-events: none; translate: 0 24px; transition: opacity .4s, translate .4s, transform .35s ease, box-shadow .35s ease; }
+  .back-to-top.show { opacity: 1; pointer-events: auto; translate: var(--tx, 0) var(--ty, 0); animation: btnPulse 2.8s ease-out infinite; }
+}
+
+/* ---------- mobile / reduced motion ---------- */
+@media (max-width: 650px) {
+  .gold-dust i:nth-child(even) { display: none; }
+  .hero-ring { display: none; }
+  .hero-star.star-one { font-size: 30px; }
+  .marquee-image { animation-duration: 6s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gold-dust, .sparkle-trail, .scroll-progress { display: none; }
+  .reveal { opacity: 1; }
+}

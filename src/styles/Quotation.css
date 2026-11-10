@@ -1,0 +1,43 @@
+.quote-section { padding: 90px 6% 100px; background: linear-gradient(180deg, #170b04 0, #2b1407 380px, #f8f5ef 380px); color: #fff5dc; }
+.quote-head { max-width: 900px; margin-bottom: 38px; }
+.quote-head h2 { font: 500 clamp(38px, 5vw, 64px)/1.1 'Playfair Display', serif; margin: 10px 0 18px; text-transform: none; }
+.quote-head h2 em { background: linear-gradient(100deg, #c98a2b, #ffe6a3, #c98a2b, #ffe6a3, #c98a2b); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shineText 5s linear infinite; }
+.quote-head > p:last-child { color: #f0dfbd; font-size: 18px; line-height: 1.7; max-width: 760px; }
+
+.quote-card { background: #fffdf8; color: #26211c; border: 1px solid #e4d3ae; border-radius: 22px; padding: 22px 24px; box-shadow: 0 18px 50px rgba(60, 38, 12, .12); margin-bottom: 22px; display: block; transition: box-shadow .4s, translate .4s; }
+.quote-card:hover { box-shadow: 0 26px 60px rgba(60, 38, 12, .2); translate: 0 -4px; }
+.quote-rate { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 15px; color: #6e6455; margin-bottom: 18px; }
+.quote-rate svg { color: #b58d52; animation: bobSm 2.6s ease-in-out infinite; }
+.quote-rate b { color: #8a5a14; font-size: 17px; }
+.quote-card label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.quote-card input { width: 100%; font: 400 20px 'DM Sans', sans-serif; padding: 15px 18px; border: 1px solid #dccaa0; border-radius: 12px; background: #fff; outline: none; transition: border-color .3s, box-shadow .3s; }
+.quote-card input:focus { border-color: #c6a46a; box-shadow: 0 0 0 4px rgba(198, 164, 106, .25); }
+.quote-note { color: #6e6455; font-size: 14.5px; line-height: 1.6; margin: 12px 0 18px; }
+.quote-error { color: #b3261e; font-size: 14.5px; margin: -6px 0 14px; animation: riseIn .4s ease; }
+.quote-submit { border: 0; cursor: pointer; font: 600 16px 'DM Sans', sans-serif; color: #180d05; padding: 15px 34px; border-radius: 999px; background: linear-gradient(120deg, #f3c66e, #b87824); position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; animation: btnPulse 2.8s ease-out infinite; }
+.quote-submit::before { content: ""; position: absolute; top: 0; left: -70%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); animation: sweep 3.8s ease-in-out infinite; }
+.quote-submit:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(184, 120, 36, .4); }
+.quote-submit:active { transform: translateY(0) scale(.97); }
+
+.quote-output { padding: 26px 24px; }
+.quote-empty { margin: 0; font-size: 18px; }
+.quote-result { display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: 32px; align-items: start; animation: riseIn .7s cubic-bezier(.2, .7, .2, 1) backwards; }
+.quote-summary > span { font-size: 12px; letter-spacing: 3px; color: #8a7a5f; }
+.quote-summary > strong { display: block; font: 700 clamp(34px, 4vw, 46px)/1.2 'Playfair Display', serif; color: #8a5a14; margin: 6px 0 18px; }
+.quote-summary ul { list-style: none; margin: 0 0 22px; padding: 0; }
+.quote-summary li { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px dashed #e0d0aa; font-size: 15.5px; }
+.quote-summary li span { color: #6e6455; }
+.quote-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.quote-btn { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font: 600 15px 'DM Sans', sans-serif; padding: 13px 22px; border-radius: 999px; border: 1px solid transparent; transition: transform .3s, box-shadow .3s, background .3s; }
+.quote-btn:hover { transform: translateY(-4px); }
+.quote-btn.whatsapp { background: #1f8f4e; color: #fff; }
+.quote-btn.whatsapp:hover { box-shadow: 0 12px 26px rgba(31, 143, 78, .4); }
+.quote-btn.ghost { background: transparent; color: #5a3d12; border-color: #c6a46a; }
+.quote-btn.ghost:hover { background: #f6ead0; }
+.quote-canvas { width: 100%; max-width: 520px; height: auto; border-radius: 16px; box-shadow: 0 20px 50px rgba(40, 22, 6, .35); justify-self: center; transition: transform .5s; }
+.quote-canvas:hover { transform: scale(1.02) rotate(-.6deg); }
+
+@media (max-width: 800px) {
+  .quote-section { padding: 60px 5% 70px; background: linear-gradient(180deg, #170b04 0, #2b1407 440px, #f8f5ef 440px); }
+  .quote-result { grid-template-columns: 1fr; }
+}

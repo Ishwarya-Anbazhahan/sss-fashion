@@ -1,0 +1,4 @@
+import { img } from "../data/products";
+export default function StorySection() {
+  return <section className="story-section" id="story"><div className="story-image"><img src={img("lakshmi.jpg")} alt="Lakshmi Haram" loading="lazy"/><div className="image-vertical-label">TAMIL NADU TRADITION</div></div><div className="story-copy"><p className="eyebrow light"><span/> வரவேற்பு</p><h2>A house for gold and silver,<br/><em>opening in two cities.</em></h2><p>SSS Fashion makes gold, sterling silver, and diamond jewellery in the Tamil Nadu tradition, with showrooms in Trichy and Coimbatore.</p><p>Pieces are shown at the Trichy and Coimbatore showrooms. Ask there for metal purity and hallmark details before you buy.</p><a className="text-link light-link" href="#contact">Visit a showroom <span>↗</span></a><div className="story-signature">Grand opening <em>05 Oct 2026</em></div></div></section>;
+}
